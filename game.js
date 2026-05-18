@@ -18,26 +18,36 @@ async function opfsWrite(name, data) {
 
 // --- Chunked tar download ---
 async function downloadTar(base, label) {
-	loading.textContent = `Downloading ${label}...`;
-	const count = parseInt(await (await fetch(base + ".count")).text());
-	const chunks = [];
-	let total = 0;
-	for (let i = 0; i < count; i++) {
-		const res = await fetch(`${base}${String(i).padStart(2, "0")}`);
-		if (!res.ok) throw new Error(`Failed: ${res.status}`);
-		const reader = res.body.getReader();
-		for (;;) {
-			const { done, value } = await reader.read();
-			if (done) break;
-			chunks.push(value);
-			total += value.length;
-			loading.textContent = `Downloading ${label}... ${(total / 1048576) | 0} MB`;
-		}
+	if (!navigator.onLine) {
+		throw new Error(`You are offline and ${label} is not cached. Please connect to the internet to download game files.`);
 	}
-	const tar = new Uint8Array(total);
-	let off = 0;
-	for (const c of chunks) { tar.set(c, off); off += c.length; }
-	return tar;
+	loading.textContent = `Downloading ${label}...`;
+	try {
+		const countRes = await fetch(base + ".count");
+		if (!countRes.ok) throw new Error(`Failed to fetch ${base}.count: ${countRes.status}`);
+		const count = parseInt(await countRes.text());
+		const chunks = [];
+		let total = 0;
+		for (let i = 0; i < count; i++) {
+			const res = await fetch(`${base}${String(i).padStart(2, "0")}`);
+			if (!res.ok) throw new Error(`Failed: ${res.status}`);
+			const reader = res.body.getReader();
+			for (;;) {
+				const { done, value } = await reader.read();
+				if (done) break;
+				chunks.push(value);
+				total += value.length;
+				loading.textContent = `Downloading ${label}... ${(total / 1048576) | 0} MB`;
+			}
+		}
+		const tar = new Uint8Array(total);
+		let off = 0;
+		for (const c of chunks) { tar.set(c, off); off += c.length; }
+		return tar;
+	} catch (e) {
+		console.error(e);
+		throw new Error(`Failed to download ${label}. Please check your connection.`);
+	}
 }
 
 async function getTar(base, label, key) {
