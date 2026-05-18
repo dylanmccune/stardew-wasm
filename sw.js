@@ -1,13 +1,13 @@
-const CACHE_NAME = "stardew-wasm-v1";
+const CACHE_NAME = "stardew-wasm-v2";
 const ASSETS_TO_CACHE = [
 	"./",
 	"./index.html",
 	"./game.js",
+	"./manifest.json",
 	"./_framework/dotnet.js",
 	"./_framework/dotnet.native.vgmtf3jg2i.js",
 	"./_framework/dotnet.runtime.2hocyfcbj2.js",
 	"./_framework/blazor.boot.json",
-	"./_framework/dotnet.native.k0dnmixusv.wasm",
 	"./_framework/dotnet.native.k0dnmixusv.wasm.count",
 	"./_framework/dotnet.native.k0dnmixusv.wasm0",
 	"./_framework/dotnet.native.k0dnmixusv.wasm1",
@@ -65,22 +65,46 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener("install", (event) => {
+	console.log("[SW] Installing...");
+	self.skipWaiting();
 	event.waitUntil(
 		caches.open(CACHE_NAME).then((cache) => {
+			console.log("[SW] Caching assets...");
 			return cache.addAll(ASSETS_TO_CACHE);
+		}).then(() => {
+			console.log("[SW] Assets cached successfully.");
+		}).catch((err) => {
+			console.error("[SW] Cache addAll failed:", err);
+		})
+	);
+});
+
+self.addEventListener("activate", (event) => {
+	console.log("[SW] Activating...");
+	event.waitUntil(
+		caches.keys().then((keys) => {
+			return Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)));
 		})
 	);
 });
 
 self.addEventListener("fetch", (event) => {
 	// Skip large assets as they are handled by OPFS in game.js
-	if (event.request.url.includes("Content.tar") || event.request.url.includes("ContentAudio.tar")) {
+	const url = new URL(event.request.url);
+	if (url.pathname.includes("Content.tar") || url.pathname.includes("ContentAudio.tar")) {
 		return;
 	}
 
 	event.respondWith(
 		caches.match(event.request).then((response) => {
-			return response || fetch(event.request);
+			if (response) return response;
+			
+			// Fallback for navigation
+			if (event.request.mode === "navigate") {
+				return caches.match("./index.html");
+			}
+
+			return fetch(event.request);
 		})
 	);
 });
