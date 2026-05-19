@@ -1,11 +1,11 @@
 {
   "mainAssemblyName": "stardew",
   "resources": {
-    "hash": "sha256-GhQiOAsGEHfLUq/sdQ/ohnOzZvRI/1nGIyxZYp5smwg=",
+    "hash": "sha256-U7rnMeNOKcXsbXGaqFylyAJHaqy5Yoi6WZWtAjh97J0=",
     "fingerprinting": {
       "FNA.19mbt6y4zi.wasm": "FNA.wasm",
       "mscorlib.emnk2ck1oc.wasm": "mscorlib.wasm",
-      "stardew.mlmc2d2oiq.wasm": "stardew.wasm",
+      "stardew.cbtq37vvle.wasm": "stardew.wasm",
       "System.Collections.Concurrent.qlhbjf9bos.wasm": "System.Collections.Concurrent.wasm",
       "System.Collections.NonGeneric.5ryvt8698k.wasm": "System.Collections.NonGeneric.wasm",
       "System.Collections.Specialized.tmjmwnow7m.wasm": "System.Collections.Specialized.wasm",
@@ -50,8 +50,8 @@
       "System.dqfxtvioy0.wasm": "System.wasm",
       "System.Xml.ReaderWriter.jdtq43bqu8.wasm": "System.Xml.ReaderWriter.wasm",
       "System.Xml.XmlSerializer.e5uisw7343.wasm": "System.Xml.XmlSerializer.wasm",
-      "dotnet.native.vgmtf3jg2i.js": "dotnet.native.js",
-      "dotnet.native.k0dnmixusv.wasm": "dotnet.native.wasm",
+      "dotnet.native.g1tykbutf2.js": "dotnet.native.js",
+      "dotnet.native.hcu4o7f0vi.wasm": "dotnet.native.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.runtime.2hocyfcbj2.js": "dotnet.runtime.js",
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
@@ -59,13 +59,13 @@
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat"
     },
     "jsModuleNative": {
-      "dotnet.native.vgmtf3jg2i.js": "sha256-AV6eDey2IjX5HV6d1CCR6/XMHT1/HBqLsZ7kNUMF3I0="
+      "dotnet.native.g1tykbutf2.js": "sha256-fHgJ3r5JLC/+6nnsR/ftvGimom6Cc/jGJ+NopSOGND8="
     },
     "jsModuleRuntime": {
       "dotnet.runtime.2hocyfcbj2.js": "sha256-5oRcSUQSLbUYyq9jPgwB6domrDHYrvLX+53QxY+0y48="
     },
     "wasmNative": {
-      "dotnet.native.k0dnmixusv.wasm": "sha256-pI9IvHEolf9ConXk6NatPw/GzXpSSX35dnrCgGpkIck="
+      "dotnet.native.hcu4o7f0vi.wasm": "sha256-XwlCS2ctnNKtVRrjQBYQp89WdfqvD3SY6Wkdxiu3HBg="
     },
     "icu": {
       "icudt_CJK.tjcz0u77k5.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -75,7 +75,7 @@
     "coreAssembly": {
       "FNA.19mbt6y4zi.wasm": "sha256-m4XcMqUo4pWqXq0i2IazkU3mITysD88fW9BjITX9Y2Y=",
       "mscorlib.emnk2ck1oc.wasm": "sha256-atlaFs3cFJnW17UMIxHmoy8Rb9t1erctMNRLA4Q7Wes=",
-      "stardew.mlmc2d2oiq.wasm": "sha256-arN0rWPJVIlnlfUPXvcLUkYrOGhIvx83W3wzXLVnsRM=",
+      "stardew.cbtq37vvle.wasm": "sha256-GNqLpSRf5Xmf1dA20037/5qA2AV7y+vp3wxW16mMtj0=",
       "System.Collections.Concurrent.qlhbjf9bos.wasm": "sha256-3gybsbHRQdhZJ4irswh3OTydADNmT+dkbCvLkBfoDi8=",
       "System.Collections.NonGeneric.5ryvt8698k.wasm": "sha256-T0GqoT4SV0S3j2ne4o7Xshw6pqADk2KeQqo9aAsIOVk=",
       "System.Collections.Specialized.tmjmwnow7m.wasm": "sha256-5WiJtPmvWyphcLAVQ6eqcxqsMdir1/Lb1qfjSOj/HL0=",
