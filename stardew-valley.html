@@ -323,6 +323,11 @@ if (audioTar) { loading.textContent = "Loading music..."; extractTar(audioTar, "
 
 loading.classList.add("hidden");
 
+window.addEventListener("beforeunload", (e) => {
+	e.preventDefault();
+	e.returnValue = "";
+});
+
 const dpr = window.devicePixelRatio || 1;
 const w = Math.round(canvas.clientWidth * dpr) || 1280;
 const h = Math.round(canvas.clientHeight * dpr) || 720;
